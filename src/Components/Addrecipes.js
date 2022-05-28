@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import Header from './Header'
 
@@ -9,6 +10,20 @@ const Addrecipes = () => {
     const subdata=()=>{
         const data={"recipetitle":recipetitle,"category":category,"description":description,"preparedby":preparedby}
         console.log(data)
+        axios.post("http://localhost:4000/api/recipeapp ",data).then(
+            (response)=>{
+                console.log(response.data)
+                if(response.data.status=="success")
+                {
+                    alert("successfully added")
+
+                }
+                else 
+                {
+                    alert("failed to added")
+                }
+            }
+        )
     }
 
   return (
@@ -26,8 +41,8 @@ const Addrecipes = () => {
                     
                     <label for="" className="form-label">CATEGORY</label>
                     <select onChange={(e)=>{setcategory(e.target.value)}} name="" id="" className="form-control">
-                        <option value="VEG">VEG</option>
-                        <option value="NON VEG">NON VEG</option>
+                        <option value="veg">veg</option>
+                        <option value="non veg">non veg</option>
                     </select>
                 </div>
                 <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
